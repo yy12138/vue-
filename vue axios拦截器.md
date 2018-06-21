@@ -2,35 +2,58 @@
 我们可以在发送所有请求之前和操作服务器响应数据之前对这种情况过滤。
 
 ```
-// http request 请求拦截器，有token值则配置上token值
-axios.interceptors.request.use(
-    config => {
-        if (token) {  // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
-            config.headers.Authorization = token;
-        }
-        return config;
-    },err => {
-        return Promise.reject(err);
+// JWT 用户权限校验，判断 TOKEN 是否在 localStorage 当中
+router.beforeEach(({name}, from, next) => {
+  // 获取 JWT Token
+  if (localStorage.getItem('JWT_TOKEN')) {
+    // 如果用户在login页面
+    if (name === 'login') {
+      next('/');
+    } else {
+      next();
     }
-);
+  } else {
+    if (name === 'login') {
+      next();
+    } else {
+      next({name: 'login'});
+    }
+  }
+});
 
-// http response 服务器响应拦截器，这里拦截401错误，并重新跳入登页重新获取token
-axios.interceptors.response.use(
-    response => {
-        return response;
-    },
-    error => {
-        if (error.response) {
-            switch (error.response.status) {
-                case 401:
-                    // 这里写清除token的代码
-                    router.replace({
-                        path: 'login',
-                        query: {redirect: router.currentRoute.fullPath}//登录成功后跳入浏览的当前页面
-                    })
-            }
-        }
-        return Promise.reject(error.response.data) 
+
+// http request 拦截器
+axios.interceptors.request.use(
+  config => {
+    if (localStorage.JWT_TOKEN) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+      config.headers.Authorization = `token ${localStorage.JWT_TOKEN}`;
     }
-);
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  });
+
+// http response 拦截器
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    if (error.response) {
+      console.log('axios:' + error.response.status);
+      switch (error.response.status) {
+        case 401:
+          // 返回 401 清除token信息并跳转到登录页面
+          store.commit('LOG_OUT');
+          router.replace({
+            path: 'login',
+            query: {redirect: router.currentRoute.fullPath}
+          });
+      }
+    }
+    return Promise.reject(error.response.data);   // 返回接口返回的错误信息
+  });
+
+Vue.prototype.$http = axios;
 ```
