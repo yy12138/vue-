@@ -1,0 +1,36 @@
+1.解决npm run build后vendor.js文件过大的方案：
+    第一种方案
+    首先vendor.js中的代码来源于main.js中import导入并使用的第三方插件和第三方组件库等，
+    所以在引用第三组件库时尽量按需加载，第三方插件可以利用cdn的方式来引入使用第三方资源
+    使用方法，例：
+    第一步：在index.html中引入(vue.min.js上线环境)
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
+    第二步：在build文件夹下面的webpack.base.conf.js添加externals
+    module.exports = {
+	entry: {
+	    app: './src/main.js'
+	},
+	externals:{
+	    'vue': 'Vue',
+	    'vue-router': 'VueRouter'
+	}
+    }
+    这里需要将vue和vue-router公开出去，供全局使用，这里小写的vue和vue-router使我们引入资源时对应的名字，冒号后面大写的名字使我们自己定义的名字和项目中要使用的名字，当然这两个名字可以一样，接下来就是将我们项目中引用对应资源的地方将原先的引入方式去掉，也就是我们原先用import引入的，例如main.js和router文件夹的index.js修改：
+    //import Vue from 'vue'
+    //import VueRouter from 'vue-router'
+    注意将router文件夹下的index.js修改
+    export default new VueRouter({
+	routes: [
+	    {
+	        path: '/',
+		redirect: '/main/home'
+	    }
+	]
+    })
+    第二种方案
+    在项目中config/index.js中可以开启gzip压缩，对打包优化也有很大的帮助
+    第一步首先安装插件compression-webpack-plugin
+    cnpm i -S compression-webpack-plugin
+    第二步设置productionGzip：true (build/webpack.prod.conf.js)
+    第三步npm run build执行后会发现每个js和css文件会压缩一个gz后缀的文件夹，浏览器如果支持g-zip会自动查找有没有gz文件，找到了就加载gz然后本地解压执行。
