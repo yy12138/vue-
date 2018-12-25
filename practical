@@ -1,3 +1,11 @@
 框架 element-ui iview 
 富文本编辑器
 react 的 slate.js Draft.js
+
+
+
+upupw 本地开发配置
+C://windows/system32/drivers/etc/hosts
+127.0.0.1 nav.loc
+
+upupw/apache2/conf/httpd-vhosts.conf
