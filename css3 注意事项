@@ -1,0 +1,15 @@
+transform 对于 inline元素是不生效的，只对block 和 inline-block生效
+
+在使用css3 transtion做动画效果时，优先选择transform，尽量不要使用height，width，margin和padding。
+
+滚动条的设置
+1. ::-webkit-scrollbar 滚动条整体部分，可以设置宽度等
+2. ::-webkit-scrollbar-button 滚动条两端的按钮
+3. ::-webkit-scrollbar-track  外层轨道
+4. ::-webkit-scrollbar-track-piece  内层滚动槽
+5. ::-webkit-scrollbar-thumb 滚动的滑块
+6. ::-webkit-scrollbar-corner 边角
+7. ::-webkit-resizer 定义右下角拖动块的样式
+
+//解决滚动条卡顿
+    -webkit-overflow-scrolling: touch;
