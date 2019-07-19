@@ -13,3 +13,15 @@ transform 对于 inline元素是不生效的，只对block 和 inline-block生�
 
 //解决滚动条卡顿
     -webkit-overflow-scrolling: touch;
+    
+    hue-rotate滤镜与动效 https://image.zhangxinxu.com/image/blog/201811/bird-color-change.gif
+    
+    .bird {
+    animation: pulse 5s linear infinite;
+}
+@keyframes pulse {
+    from { filter: hue-rotate(0); }
+    to { filter: hue-rotate(360deg); }
+}
+
+链接地址 https://www.zhangxinxu.com/wordpress/2018/11/css-filter-hue-rotate-button/
