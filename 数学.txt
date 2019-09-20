@@ -1,0 +1,45 @@
+直角三角形ABC中
+角A的正弦值就等于角A的对边比斜边，
+余弦等于角A的邻边比斜边
+正切等于对边比邻边
+两角和与差的三角函数
+cos(α+β）=cosα*cosβ-sinα*sinβ
+cos（α-β）= cosα*cosβ + sinα*sinβ
+sin（α+β）= sinα*cosβ + cosα*sinβ
+sin（α-β）= sinα*cosβ - cosα*sinβ
+tan（α+β）= （tanα+tanβ）/（1-tanα*tanβ）
+tan（α-β）= （tanα-tanβ）/（1+tanα*tanβ）
+
+辅助角公式
+Asina+Bcosa = （A^2+B^2）^(1/2)sin(a+t)
+sint = B/(A^2+B^2)^(1/2)
+cost = A/(A^2+B^2)^(1/2)
+倍角公式
+sin(2a)= 2sina*cosa = 2/(tana+cota)
+cos(2a) = cos^2(a)-sin^2(a)=2cos^2(a)-1 = 1-2sin^2(a)
+tan(2a)=2tana/[1-tan^2(a)]
+
+降幂公式
+sin^2(a) = (1-cos(2a))/2
+cos^2(a) = (1+cos(2a))/2
+tan^2(a) = (1-cos(2a))/(1+cos(2a))
+
+积化和差公式
+sinα*sinβ = （1/2)[sin(α+β)+sin(α-β)]
+cosα*sinβ = (1/2)[sin(α+β)-sin(α-β)]
+cosα*cosβ = (1/2)[cos(α+β)+cos(α-β)]
+sinα*sinβ = (1/2)[cos(α+β)-cos(α-β)]
+
+和差化积公式
+sinα+sinβ = 2sin[(α+β)/2]cos[(α-β)/2]
+sinα-sinβ = 2cos[(α+β)/2]sin[(α-β)/2]
+cosα+cosβ = 2cos[(α+β)/2]cos[(α-β)/2]
+cosα-cosβ = 2sin[(α+β)/2]sin[(α-β)/2]
+
+余弦定理表达式1
+c^2 = a^2 +b^2 -2abcosC
+同理，也可描述为：
+
+
+勾股定理是余弦定理的特例，当  为90°时，  ，余弦定理可简化为  ，即勾股定理。
+
